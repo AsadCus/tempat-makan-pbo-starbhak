@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_menu');
             $table->integer('harga');
-            $table->enum('status', ['Tersedia','Kosong']);
+            $table->string('status');
             $table->integer('jenis_id');
             $table->integer('resto_id');
             $table->timestamps();

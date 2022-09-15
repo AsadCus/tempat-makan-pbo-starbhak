@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Menu;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Jenis extends Model
 {
@@ -12,4 +13,9 @@ class Jenis extends Model
     protected $fillable = [
         'jenis',
     ];
+
+    public function menu()
+    {
+        return $this->hasMany(Menu::class);
+    }
 }

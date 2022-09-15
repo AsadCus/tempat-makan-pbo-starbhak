@@ -27,10 +27,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="/dashboard/{{ Auth::user()->level }}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="/logout" class="nav-link">Logout</a>
       </li>
     </ul>
 
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block">{{ Auth::user()->username }}</a>
         </div>
       </div>
 
@@ -108,9 +108,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="/dashboard" class="nav-link active">
+            <a href="/dashboard/{{ Auth::user()->level }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/dashboard/{{ Auth::user()->level }}/menu" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>menu</p>
             </a>
           </li>
         </ul>
