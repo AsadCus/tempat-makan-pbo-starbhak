@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
+    public function tes()
+    {
+        return redirect('/login');
+    }
+
     public function index()
     {
         return view('login');
@@ -28,8 +33,8 @@ class AuthController extends Controller
                 return redirect()->intended('dashboard/admin');
             } elseif ($user->level == 'manajer') {
                 return redirect()->intended('dashboard/manajer');
-            } elseif ($user->level == 'kasir') {
-                return redirect()->intended('dashboard/kasir');
+            } elseif ($user->level == 'staff') {
+                return redirect()->intended('dashboard/staff');
             }
             return redirect()->intended('/login');
         }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Menu;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class MenuController extends Controller
@@ -59,9 +59,10 @@ class MenuController extends Controller
         ]);
     }
 
-    public function destroy($menu)
+    public function destroy($id)
     {
-        $data = Menu::where('id', $menu)->first();
+        $data = Menu::where('id', $id)->first();
+
         if (empty($data)) {
             return response()->json(['message' => 'Data Tidak Ditemukan'], 404);    
         }

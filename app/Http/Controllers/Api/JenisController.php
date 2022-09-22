@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Jenis;
+use Illuminate\Http\Request;
+use App\Services\JenisService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class JenisController extends Controller
 {
+    public function __construct(JenisService $jenisService)
+    {
+        $this->jenisService = $jenisService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +21,7 @@ class JenisController extends Controller
      */
     public function index()
     {
-        $jenis = Jenis::all();
-
+        $jenis = $this->jenisService->handleGetJenis();
         return response()->json($jenis);
     }
 

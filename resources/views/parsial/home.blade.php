@@ -1,5 +1,5 @@
 @extends('layout')
-@section('judul','Dashboard')
+{{-- @section('judul','Dashboard') --}}
 @section('isi')
 <div class="row">
     <div class="col-12 col-sm-6 col-md-3">
@@ -20,7 +20,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Menu Tersedia</span>
-                <span class="info-box-number">{{ $menu->where('status', '=', 'tersedia')->count() }}</span>
+                <span class="info-box-number">{{ $menu->where('status', 'tersedia')->count() }}</span>
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Menu</th>
-                            <th class="col-1">Harga</th>
+                            <th class="col-2">Harga</th>
                             <th class="col-1">Status</th>
                         </tr>
                     </thead>

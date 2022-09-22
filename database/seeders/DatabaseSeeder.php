@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\MejaSeeder;
+use Database\Seeders\MenuSeeder;
 use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +19,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(MenuSeeder::class);
+        $this->call(MejaSeeder::class);
     }
 }

@@ -45,28 +45,28 @@ class MenuSeeder extends Seeder
         $menu = [
             [
                 'nama_menu' => 'Mie Ayam',
-                'harga' => '13000',
+                'harga' => 'Rp. 13.000',
                 'status' => 'tersedia',
                 'jenis_id' => '1',
                 'resto_id' => '1'
             ],
             [
                 'nama_menu' => 'Mie Ayam Pangsit',
-                'harga' => '15000',
+                'harga' => 'Rp. 15.000',
                 'status' => 'tersedia',
                 'jenis_id' => '1',
                 'resto_id' => '1'
             ],
             [
                 'nama_menu' => 'Mie Ayam Bakso',
-                'harga' => '16000',
+                'harga' => 'Rp. 15.000',
                 'status' => 'tersedia',
                 'jenis_id' => '1',
                 'resto_id' => '1'
             ],
             [
                 'nama_menu' => 'Es Teh Manis',
-                'harga' => '3000',
+                'harga' => 'Rp. 3.000',
                 'status' => 'tersedia',
                 'jenis_id' => '2',
                 'resto_id' => '1'

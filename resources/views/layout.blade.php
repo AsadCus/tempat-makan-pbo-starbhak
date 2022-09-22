@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -116,9 +117,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="/dashboard/{{ Auth::user()->level }}/menu" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>menu</p>
+              <p>Menu</p>
             </a>
           </li>
+          @if ( Auth::user()->level != 'kasir' )
+          <li class="nav-item">
+            <a href="/dashboard/{{ Auth::user()->level }}/meja" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Meja</p>
+            </a>
+          </li>
+          @endif
+          @if ( Auth::user()->level == 'admin' )
+          <li class="nav-item">
+            <a href="/dashboard/{{ Auth::user()->level }}/user" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>User</p>
+            </a>
+          </li>  
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -180,5 +197,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+<script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>

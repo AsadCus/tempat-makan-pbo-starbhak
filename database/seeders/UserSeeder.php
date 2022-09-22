@@ -29,9 +29,9 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('12345'),
             ],
             [
-                'username' => 'kasir1',
-                'email' => 'kasir@nugas.com',
-                'level' => 'kasir',
+                'username' => 'staff1',
+                'email' => 'staff@nugas.com',
+                'level' => 'staff',
                 'password' => bcrypt('12345'),
             ]
         ];

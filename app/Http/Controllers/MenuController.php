@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\MenuService;
+use App\Services\JenisService;
 
 class MenuController extends Controller
 {
-    public function __construct(MenuService $menuService)
+    public function __construct(MenuService $menuService, JenisService $jenisService)
     {
         $this->menuService = $menuService;
+        $this->jenisService = $jenisService;
     }
     /**
      * Display a listing of the resource.
@@ -20,9 +22,13 @@ class MenuController extends Controller
     {
         $menu_makanan = $this->menuService->handleMenuMakanan();
         $menu_minuman = $this->menuService->handleMenuMinuman();
+        $menu = $this->menuService->handleMenu();
+        $jenis = $this->jenisService->handleGetJenis();
         return view('parsial.menu', [
             'menu_makanan' => $menu_makanan,
             'menu_minuman' => $menu_minuman,
+            'menu' => $menu,
+            'jenis' => $jenis
         ]);
     }
 
@@ -44,7 +50,8 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->menuService->handleStoreMenu($request);
+        return back();
     }
 
     /**
@@ -78,7 +85,8 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->menuService->handleUpdateMenu($request, $id);
+        return back();
     }
 
     /**
@@ -89,6 +97,13 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->menuService->handleDeleteMenu($id);
+        return back();
+    }
+
+    public function deactive(Request $request, $id)
+    {
+        $this->menuService->handleStatusMenu($request, $id);
+        return back();
     }
 }
