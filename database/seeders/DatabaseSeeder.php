@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\MejaSeeder;
 use Database\Seeders\MenuSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\PesananSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(MenuSeeder::class);
         $this->call(MejaSeeder::class);
+        $this->call(PesananSeeder::class);
     }
 }

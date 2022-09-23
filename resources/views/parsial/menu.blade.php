@@ -2,6 +2,7 @@
 {{-- @section('judul','Dashboard') --}}
 @section('isi')
 {{-- Tabel Menu --}}
+@if ( Auth::user()->level != 'staff' )
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Tambah Menu</h3>
@@ -46,6 +47,7 @@
         </table>
     </div>
 </div>
+@endif
 
 <div class="row">
     <div class="col-md-6">

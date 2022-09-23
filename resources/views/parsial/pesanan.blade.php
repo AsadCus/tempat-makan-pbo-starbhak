@@ -6,6 +6,11 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Pesanan</h3>
+        {{-- <a href="/pesanan/store" class="btn btn-secondary btn-sm float-right">Pesan</a> --}}
+        <button type="button" class="btn btn-secondary btn-sm float-right" data-toggle="modal"
+            data-target="#modalPemesanan">
+            Pesan
+        </button>
     </div>
 
     <div class="card-body">
@@ -16,28 +21,42 @@
                     <th>User</th>
                     <th>Kode Pesanan</th>
                     <th>Meja</th>
+                    <th class="col-1">Status</th>
                     <th class="col-1">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pesanan as $item)
+                @foreach ($pesanan->where('status', '==', 'active') as $item)
                 <tr>
                     <td>{{ $loop->iteration }}.</td>
-                    <td class="user-username">{{ $item->user->username }}</td>
-                    <td class="user-email"><a href="/pesanan/show/{{ $item->id }}">{{ $item->kode_pesanan }}</a></td>
-                    <td class="text-capitalize user-level">No.{{ $item->meja->no_meja }}</td>
+                    <td>{{ $item->user->username }}</td>
+                    {{-- <td>@currency($item->detail_pesanan->sum('jml_harga'))</td> --}}
+                    <td><a href="/pesanan/show/{{ $item->id }}">{{ $item->kode_pesanan }}</a></td>
+                    <td>No.{{ $item->meja->no_meja }}</td>
+                    <td class="text-capitalize">{{ $item->status }}</td>
                     <td class="d-flex">
                         <button type="button" class="btn btn-info btn-sm tombol-edit" data-toggle="modal"
                             data-target="#modalEditUser" data-id="{{ $item->id }}">
                             <i class="fas fa-pencil-alt"></i>
                         </button>|
-                        <form action="/user/delete/{{ $item->id }}" method="POST">
+                        <button type="button" class="btn btn-secondary btn-sm tombol-edit" data-toggle="modal"
+                        data-target="#modalPembayaran" data-id="{{ $item->id }}">
+                            <i class="bi bi-cash"></i>
+                        </button>
+                        {{-- <form action="/pesanan/bayar/{{ $item->id }}" method="POST">
+                            @csrf
+                            <input type="text" name="meja_id" value="{{ $item->meja_id }}" class="d-none">
+                            <button class="btn btn-danger btn-sm">
+                                <i class="bi bi-cash"></i>
+                            </button>
+                        </form> --}}
+                        {{-- <form action="/pesanan/bayar/{{ $item->id }}" method="POST">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash"></i>
                             </button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
                 @endforeach
@@ -90,16 +109,16 @@
         </div>
     </div>
 </div> --}}
-{{-- Modal Add User --}}
-{{-- <div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog">
+{{-- Modal Add Pesanan --}}
+<div class="modal fade" id="modalPemesanan" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tambah User</h5>
+                <h5 class="modal-title">Pesan Makanan</h5>
             </div>
-            <form action="/user/store" method="POST">
+            <form action="/pesanan/store" method="POST">
                 @csrf
-                <div class="modal-body">
+                {{-- <div class="modal-body">
                     <div class="form-group">
                         <label for="">Username</label>
                         <input type="text" class="form-control" name="username" placeholder="Username" required>
@@ -116,7 +135,7 @@
                             <option value="staff">Staff</option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -124,5 +143,39 @@
             </form>
         </div>
     </div>
-</div> --}}
+</div>
+<div class="modal fade" id="modalPembayaran" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pembayaran</h5>
+            </div>
+            <form action="/pesanan/bayar/" method="POST">
+                @csrf
+                {{-- <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Emai</label>
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Level</label>
+                        <select name="level" class="form-control" required>
+                            <option selected>Pilih..</option>
+                            <option value="manajer">Manajer</option>
+                            <option value="staff">Staff</option>
+                        </select>
+                    </div>
+                </div> --}}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

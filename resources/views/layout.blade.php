@@ -9,6 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tempat Makan | App</title>
 
+  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> --}}
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -120,14 +121,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <p>Menu</p>
             </a>
           </li>
-          @if ( Auth::user()->level != 'kasir' )
           <li class="nav-item">
             <a href="/dashboard/{{ Auth::user()->level }}/meja" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Meja</p>
             </a>
           </li>
-          @endif
           @if ( Auth::user()->level == 'admin' )
           <li class="nav-item">
             <a href="/dashboard/{{ Auth::user()->level }}/user" class="nav-link">

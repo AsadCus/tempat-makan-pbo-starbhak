@@ -14,8 +14,8 @@ class MejaService
 
     public function handleAllMeja()
     {
-        $meja = $this->meja->paginate(5);
-        // $meja = $this->meja->all();
+        // $meja = $this->meja->paginate(5);
+        $meja = $this->meja->all();
         return($meja);
     }
 
@@ -43,6 +43,16 @@ class MejaService
             $meja->save();
             return ($meja);
         }
+    }
+
+    public function handleTersediaMeja($request)
+    {
+        $meja_id = $request->meja_id;
+        // dd($meja_id);
+        $meja = $this->meja->find($meja_id);
+        $meja->status = 'tersedia';
+        $meja->save();
+        // return ($meja);
     }
 
     public function handleDeleteMeja($id)

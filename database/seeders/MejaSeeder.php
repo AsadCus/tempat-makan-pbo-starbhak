@@ -22,7 +22,7 @@ class MejaSeeder extends Seeder
             ],
             [
                 'no_meja' => '02',
-                'status' => 'tersedia'
+                'status' => 'dipesan'
             ],
             [
                 'no_meja' => '03',
@@ -34,11 +34,11 @@ class MejaSeeder extends Seeder
             ],
             [
                 'no_meja' => '05',
-                'status' => 'tersedia'
+                'status' => 'dipesan'
             ],
             [
                 'no_meja' => '06',
-                'status' => 'tersedia'
+                'status' => 'dipesan    '
             ],
         ];
 

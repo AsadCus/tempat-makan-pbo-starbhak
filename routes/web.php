@@ -53,7 +53,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/dashboard/manajer/meja', [MejaController::class, 'index'])->name('dashboard.manajer.meja');
     });
     Route::group(['middleware' => 'cek_login:staff'], function () {
-        Route::get('/dashboard/staff', [HomeController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard/staff', [HomeController::class, 'index'])->name('dashboard.staff');
+        Route::get('/dashboard/staff/menu', [MenuController::class, 'index'])->name('dashboard.staff.menu');
+        Route::get('/dashboard/staff/meja', [MejaController::class, 'index'])->name('dashboard.staff.meja');
+        Route::get('/dashboard/staff/pesanan', [PesananController::class, 'index'])->name('dashboard.staff.pesanan');
     });
 });
 
@@ -79,4 +82,6 @@ Route::put('/user/update/{id}', [UserController::class, 'update']);
 
 // ========================================= Pesanan ===================================================
 Route::get('/pesanan/show/{id}', [PesananController::class, 'show']);
+Route::get('/pesanan/store', [PesananController::class, 'store']);
+Route::post('/pesanan/bayar/{id}', [PesananController::class, 'bayar']);
  

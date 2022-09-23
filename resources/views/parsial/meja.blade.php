@@ -50,7 +50,9 @@
                     <th style="width: 10px">#</th>
                     <th>Nomor Meja</th>
                     <th class="col-2">Status</th>
+                    @if (Auth::user()->level == 'admin')
                     <th class="col-1">Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -58,17 +60,22 @@
                 <tr>
                     <td>{{ $loop->iteration }}.</td>
                     <td>{{ $item->no_meja }}</td>
-                    <td class="text-capitalize">{{ $item->status }}</td>
-                    <td class="d-flex">
-                        <form action="/meja/deactive/{{ $item->id }}" method="POST">
+                    <td class="text-capitalize">
+                    @if ($item->status == 'tersedia')
+                        <button class="btn border-0 btn-success">{{ $item->status }}</button>
+                    @else
+                        <button class="btn border-0 btn-danger">{{ $item->status }}</button>
+                    @endif
+                    </td>
+                    @if (Auth::user()->level == 'admin')  
+                    <td>
+                        {{-- <form action="/meja/deactive/{{ $item->id }}" method="POST">
                             @csrf
                             <input type="text" name="status" value="{{ $item->status }}" class="d-none">
                             <button type="submit" class="btn btn-secondary btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
-                        </form>
-                        @if (Auth::user()->level == 'admin')
-                        |
+                        </form> --}}
                         <form action="/meja/delete/{{ $item->id }}" method="POST">
                             @csrf
                             @method('delete')
@@ -76,8 +83,8 @@
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>
-                        @endif
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
