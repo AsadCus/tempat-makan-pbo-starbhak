@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_menu');
-            $table->string('harga');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('kode_pesanan');
+            $table->unsignedBigInteger('meja_id');
+            $table->foreign('meja_id')->references('id')->on('mejas');
             $table->string('status');
-            $table->unsignedBigInteger('jenis_id');
-            $table->foreign('jenis_id')->references('id')->on('jenis');
-            $table->unsignedBigInteger('resto_id');
-            $table->foreign('resto_id')->references('id')->on('restos');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('pesanans');
     }
 };

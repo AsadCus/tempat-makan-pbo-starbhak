@@ -19,11 +19,20 @@ class Menu extends Model
 
     public function jenis()
     {
-        return $this->belongsTo(Jenis::class, 'jenis_id');
+        return $this->belongsTo(Jenis::class);
     }
+    // public function jenis()
+    // {
+    //     return $this->belongsTo(Jenis::class, 'jenis_id');
+    // }
 
     public function resto()
     {
-        return $this->belongsTo(Resto::class, 'resto_id');
+        return $this->belongsTo(Resto::class);
+    }
+
+    public function detail_pesanan()
+    {
+        return $this->hasMany(DetailPesanan::class);
     }
 }

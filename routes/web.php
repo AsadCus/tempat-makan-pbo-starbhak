@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MejaController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/dashboard/admin/menu', [MenuController::class, 'index'])->name('dashboard.admin.menu');
         Route::get('/dashboard/admin/meja', [MejaController::class, 'index'])->name('dashboard.admin.meja');
         Route::get('/dashboard/admin/user', [UserController::class, 'index'])->name('dashboard.admin.user');
+        Route::get('/dashboard/admin/pesanan', [PesananController::class, 'index'])->name('dashboard.admin.pesanan');
     });
     Route::group(['middleware' => 'cek_login:manajer'], function () {
         Route::get('/dashboard/manajer', [HomeController::class, 'index'])->name('dashboard.admin');
@@ -74,3 +76,7 @@ Route::post('/user/store', [UserController::class, 'store']);
 Route::delete('/user/delete/{id}', [UserController::class, 'destroy']);
 Route::post('/user/edit/{id}', [UserController::class, 'edit']);
 Route::put('/user/update/{id}', [UserController::class, 'update']);
+
+// ========================================= Pesanan ===================================================
+Route::get('/pesanan/show/{id}', [PesananController::class, 'show']);
+ 
