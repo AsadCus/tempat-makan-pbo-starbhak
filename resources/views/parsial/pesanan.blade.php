@@ -2,45 +2,6 @@
 {{-- @section('judul','Dashboard') --}}
 @section('isi')
 
-{{-- Modal Detail Pesanan --}}
-<div class="modal fade" id="detailPesanan" tabindex="-1" aria-labelledby="detailPesananLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detailPesananLabel">*kode pesanan*</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <dl class="row body-detail-pesanan">
-                    <dt class="col-sm-3">Tanggal :</dt>
-                    <dd class="col-sm-9">
-                        <p>2022-09-23</p>
-                    </dd>
-
-                    <dt class="col-sm-3">Menu :</dt>
-                    <dd class="col-sm-9">
-                        <dl class="row">
-                            <dt class="col-sm-4">Rp 15.000,00</dt>
-                            <dd class="col-sm-8">Bakso</dd>
-                            <dt class="col-sm-4">Rp 15.000,00</dt>
-                            <dd class="col-sm-8">Bakso</dd>
-                            <dt class="col-sm-4">Rp 15.000,00</dt>
-                            <dd class="col-sm-8">Bakso</dd>
-                        </dl>
-                    </dd>
-
-                    <dt class="col-sm-3">Total Harga :</dt>
-                    <dd class="col-sm-9">
-                        <strong>Rp 100.000,00</strong>
-                    </dd>
-                </dl>
-            </div>
-        </div>
-    </div>
-</div>
-
 {{-- Tabel Pesanan --}}
 <div class="card">
     <div class="card-header">
@@ -155,7 +116,7 @@
 </div> --}}
 {{-- Modal Add Pesanan --}}
 <div class="modal fade" id="modalPemesanan" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Pesan Makanan</h5>
@@ -171,15 +132,74 @@
                         <label for="">Kode Pesanan : {{ $kode }}</label>
                         <input type="text" class="form-control d-none" name="kode_pesanan" value="{{ $kode }}" disabled>
                     </div>
-                    <div class="form-group">
-                        <label for="">Meja</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="meja_id">Meja :</label>
+                        </div>
                         <select name="meja_id" class="form-control" required>
                             <option selected>Pilih..</option>
                             @foreach ($meja->where('status', 'tersedia') as $item)
                                 <option value="{{ $item->id }}">{{ $item->no_meja }}</option>
                             @endforeach
                         </select>
-                    </div>
+                      </div>
+                    <form action="" method="POST">
+                        <table class="table table-borderless">
+                            <tr class="d-flex justify-content-between">
+                                <td style="padding: 0;" class="col-11">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="menu_id">Menu :</label>
+                                        </div>
+                                        <select name="menu_id" id="menuSelect" class="form-control selectPemesanan" onchange="jmlHarga()" required>
+                                            <option selected>Pilih Menu..</option>
+                                            @foreach ($menu->where('status', 'tersedia') as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama_menu }}</option>
+                                            @endforeach
+                                        </select>
+                                        <input type="text" class="form-control col-1" name="qty" placeholder="Qty" value="1">
+                                        <input type="text" id="jml_harga" class="form-control col-3 dengan-rupiah" placeholder="Jumlah Harga" name="jml_harga">
+                                    </div>
+                                </td>
+                                {{-- <td style="padding: 0;" class="col-2">
+                                    <input type="number" class="form-control" name="qty" placeholder="Jumlah">
+                                </td> --}}
+                                {{-- <td style="padding: 0;" class="col-3">
+                                    <input type="number" class="form-control" placeholder="Jumlah Harga" name="jml_harga" disabled>
+                                </td> --}}
+                                <td style="padding: 0;" class="col-1">
+                                    <a href="/pesanan/store" class="btn btn-secondary float-right">Add</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Menu</th>
+                                <th class="col-1">Qty</th>
+                                <th class="col-2">Harga</th>
+                                <th class="col-1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- @foreach ($menu_pesanan as $item) --}}
+                            <tr>
+                                {{-- <td>{{ $loop->iteration }}.</td> --}}
+                                <td>1.</td>
+                                <td>Mie Ayam - Makanan</td>
+                                <td>2</td>
+                                <td>Rp.30.000</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {{-- @endforeach --}}
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -189,6 +209,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modalPembayaran" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -220,6 +241,45 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+{{-- Modal Detail Pesanan --}}
+<div class="modal fade" id="detailPesanan" tabindex="-1" aria-labelledby="detailPesananLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailPesananLabel">*kode pesanan*</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <dl class="row body-detail-pesanan">
+                    <dt class="col-sm-3">Tanggal :</dt>
+                    <dd class="col-sm-9">
+                        <p>2022-09-23</p>
+                    </dd>
+
+                    <dt class="col-sm-3">Menu :</dt>
+                    <dd class="col-sm-9">
+                        <dl class="row">
+                            <dt class="col-sm-4">Rp 15.000,00</dt>
+                            <dd class="col-sm-8">Bakso</dd>
+                            <dt class="col-sm-4">Rp 15.000,00</dt>
+                            <dd class="col-sm-8">Bakso</dd>
+                            <dt class="col-sm-4">Rp 15.000,00</dt>
+                            <dd class="col-sm-8">Bakso</dd>
+                        </dl>
+                    </dd>
+
+                    <dt class="col-sm-3">Total Harga :</dt>
+                    <dd class="col-sm-9">
+                        <strong>Rp 100.000,00</strong>
+                    </dd>
+                </dl>
+            </div>
         </div>
     </div>
 </div>

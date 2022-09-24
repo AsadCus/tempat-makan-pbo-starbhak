@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Services\MejaService;
+use App\Services\MenuService;
 use App\Services\PesananService;
 use Illuminate\Http\Request;
 
 
 class PesananController extends Controller
 {
-    public function __construct(PesananService $pesananService, MejaService $mejaService)
+    public function __construct(PesananService $pesananService, MejaService $mejaService, MenuService $menuService)
     {
         $this->pesananService = $pesananService;
         $this->mejaService = $mejaService;
+        $this->menuService = $menuService;
     }
 
     public function index()
@@ -20,10 +22,12 @@ class PesananController extends Controller
         $kode = $this->pesananService->handleKodePesanan();
         $meja = $this->mejaService->handleAllMeja();
         $pesanan = $this->pesananService->handleAllPesanan();
+        $menu = $this->menuService->handleMenu();
         return view('parsial.pesanan', [
             'pesanan' => $pesanan,
             'meja' => $meja,
             'kode' => $kode,
+            'menu' => $menu,
         ]);
     }
 

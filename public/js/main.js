@@ -1,3 +1,21 @@
+// Selec2
+// $('.selectPemesanan').select2({
+//     width: '100%',
+//     height: '10px',
+//     dropdownParent: $("#modalPemesanan"),
+//     theme: "bootstrap"
+// });
+
+// console.log($('.selectpemesanan'));
+// $(document).ready(function() {
+//     $('.selectPemesanan').select2({
+//         width: '100%',
+//         height: '10px',
+//         dropdownParent: $("#modalPemesanan"),
+//         theme: "bootstrap"
+//     });
+// });
+
 // Edit
 const tombolEdit = document.querySelectorAll('.tombol-edit');
 const formEdit = document.querySelector('.form-edit');
@@ -49,30 +67,6 @@ tombolEdit.forEach((e, i) => {
     })
 });
 
-// Rupiah
-$("#dengan-rupiah").keyup(function () {
-    this.value = formatRupiah(this.value, 'Rp. ');
-});
-$(".dengan-rupiah").keyup(function () {
-    this.value = formatRupiah(this.value, 'Rp. ');
-});
-
-function formatRupiah(angka, prefix) {
-    var number_string = angka.replace(/[^,\d]/g, '').toString(),
-        split = number_string.split(','),
-        sisa = split[0].length % 3,
-        rupiah = split[0].substr(0, sisa),
-        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-    if (ribuan) {
-        separator = sisa ? '.' : '';
-        rupiah += separator + ribuan.join('.');
-    }
-
-    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-}
-
 $('.modal-detail-pesanan').click(function (event) {
     var modalBody = $('.body-detail-pesanan');
     var modalBodyData = modalBody.children();
@@ -111,3 +105,33 @@ $('.modal-detail-pesanan').click(function (event) {
         modalBody.append(html);
     });
 });
+
+// Rupiah
+$("#dengan-rupiah").keyup(function () {
+    this.value = formatRupiah(this.value, 'Rp. ');
+});
+$(".dengan-rupiah").keyup(function () {
+    this.value = formatRupiah(this.value, 'Rp. ');
+});
+
+function formatRupiah(angka, prefix) {
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+
+function jmlHarga() {
+    // var jml_harga = formatRupiah(document.getElementById("menuSelect").value, 'Rp. ');
+    var jml_harga = document.getElementById("menuSelect").value;
+    document.getElementById("jml_harga").value = jml_harga;
+}

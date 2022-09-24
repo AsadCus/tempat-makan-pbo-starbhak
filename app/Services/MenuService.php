@@ -14,7 +14,7 @@ class MenuService
 
     public function handleMenu()
     {
-        $menu = $this->menu->with('jenis')->with('resto')->paginate(5);
+        $menu = $this->menu->with('jenis')->with('resto')->get();
         return($menu);
     }
 
