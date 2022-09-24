@@ -4,13 +4,15 @@ namespace App\Services;
 
 // use App\Models\Meja;
 use App\Models\Pesanan;
+use App\Models\DetailPesanan;
 use Illuminate\Http\Request;
 
 class PesananService
 {
-    public function __construct(Pesanan $pesanan)
+    public function __construct(Pesanan $pesanan, DetailPesanan $detailPesanan)
     {
         $this->pesanan = $pesanan;
+        $this->detailPesanan = $detailPesanan;
         // $this->meja = $meja;
     }
 
@@ -22,10 +24,12 @@ class PesananService
 
     public function handleShowDetailPesanan($id)
     {
-        $data = $this->pesanan->with('user', 'detail_pesanan')->find($id);
-        // $data->with('user', 'detail_pesanan')->get();
-        dd($data);
-        // return($data);
+        $data = $this->detailPesanan->with('menu', 'pesanan')->where('pesanan_id', $id)->get();
+        $data = $data->map(function ($item) {
+            $item['tanggal'] = str_replace('-', ' ', $item->created_at->format('d-m-Y'));
+            return $item;
+        });
+        return($data);
     }
 
     public function handleKodePesanan()

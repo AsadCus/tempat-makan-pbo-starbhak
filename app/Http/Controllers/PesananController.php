@@ -30,7 +30,7 @@ class PesananController extends Controller
     public function show($id)
     {
         $data = $this->pesananService->handleShowDetailPesanan($id);
-        return($data);
+        return response()->json($data, 200);
     }
 
     public function store(Request $request)

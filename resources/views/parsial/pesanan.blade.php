@@ -2,6 +2,45 @@
 {{-- @section('judul','Dashboard') --}}
 @section('isi')
 
+{{-- Modal Detail Pesanan --}}
+<div class="modal fade" id="detailPesanan" tabindex="-1" aria-labelledby="detailPesananLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailPesananLabel">*kode pesanan*</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <dl class="row body-detail-pesanan">
+                    <dt class="col-sm-3">Tanggal :</dt>
+                    <dd class="col-sm-9">
+                        <p>2022-09-23</p>
+                    </dd>
+
+                    <dt class="col-sm-3">Menu :</dt>
+                    <dd class="col-sm-9">
+                        <dl class="row">
+                            <dt class="col-sm-4">Rp 15.000,00</dt>
+                            <dd class="col-sm-8">Bakso</dd>
+                            <dt class="col-sm-4">Rp 15.000,00</dt>
+                            <dd class="col-sm-8">Bakso</dd>
+                            <dt class="col-sm-4">Rp 15.000,00</dt>
+                            <dd class="col-sm-8">Bakso</dd>
+                        </dl>
+                    </dd>
+
+                    <dt class="col-sm-3">Total Harga :</dt>
+                    <dd class="col-sm-9">
+                        <strong>Rp 100.000,00</strong>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- Tabel Pesanan --}}
 <div class="card">
     <div class="card-header">
@@ -32,7 +71,9 @@
                     <td>{{ $loop->iteration }}.</td>
                     <td>{{ $item->user->username }}</td>
                     {{-- <td>@currency($item->detail_pesanan->sum('jml_harga'))</td> --}}
-                    <td><a href="/pesanan/show/{{ $item->id }}">{{ $item->kode_pesanan }}</a></td>
+                    <td>
+                        <a href="" class="modal-detail-pesanan" role="button" data-toggle="modal" data-target="#detailPesanan" data-pesanan_id="{{ $item->id }}">{{ $item->kode_pesanan }}</a>
+                    </td>
                     <td>No.{{ $item->meja->no_meja }}</td>
                     <td class="text-capitalize">{{ $item->status }}</td>
                     <td>

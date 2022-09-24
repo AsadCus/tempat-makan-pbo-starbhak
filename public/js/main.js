@@ -72,3 +72,42 @@ function formatRupiah(angka, prefix) {
     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
     return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
 }
+
+$('.modal-detail-pesanan').click(function (event) {
+    var modalBody = $('.body-detail-pesanan');
+    var modalBodyData = modalBody.children();
+    var button = $(event.currentTarget);
+    var id = button.data('pesanan_id');
+    var html = '';
+    var totalHarga = 0;
+
+    $.get("/pesanan/show/"+id, function(data){
+        modalBodyData.remove();
+        html +=
+            '<dt class="col-sm-3">Tanggal :</dt>' +
+            '<dd class="col-sm-9">'+
+            '<p>' + data[0]['tanggal'] + '</p>'+
+            '</dd>'+
+            '<dt class="col-sm-3">Menu :</dt>'+
+            '<dd class="col-sm-9">'+
+            '<dl class="row">';
+        
+        data.forEach(detailPesanan => {
+            html +=
+            '<dt class="col-sm-4">' + detailPesanan['menu']['harga'] + '</dt>'+
+            '<dd class="col-sm-8">' + detailPesanan['menu']['nama_menu'] + '</dd>';
+
+            totalHarga += detailPesanan['jml_harga'];
+        });
+
+        html +=
+            '</dl>'+
+            '</dd>'+
+            '<dt class="col-sm-3">Total Harga :</dt>'+
+            '<dd class="col-sm-9">'+
+            '<strong>' + totalHarga + '</strong>'+
+            '</dd>';
+
+        modalBody.append(html);
+    });
+});
