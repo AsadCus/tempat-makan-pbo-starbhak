@@ -139,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <a href="/dashboard/{{ Auth::user()->level }}/pesanan" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Pesan</p>
+              <p>Kasir</p>
             </a>
           </li>  
           {{-- @endif --}}

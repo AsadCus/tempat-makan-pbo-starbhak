@@ -28,6 +28,25 @@ class PesananService
         // return($data);
     }
 
+    public function handleKodePesanan()
+    {
+        $allpesanans = count($this->pesanan->get());
+        $plusplus = $allpesanans + 1;
+
+        if ($allpesanans > 0) {
+            if ($allpesanans >= 9) {
+                $kode_pesanan = '0' . $plusplus . '/' . 'Makan';
+            } else {
+                $kode_pesanan = '00' . $plusplus . '/' . 'Makan';
+            }
+        } else {
+            $kode_pesanan = '001' . '/' . 'Makan';
+        }
+
+        // dd($kode_pesanan);
+        return($kode_pesanan);
+    }
+
     public function handleStorePesanan(Request $request)
     {
         $a = 'Rp.10.000';
