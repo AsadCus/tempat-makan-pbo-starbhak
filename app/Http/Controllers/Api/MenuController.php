@@ -14,7 +14,7 @@ class MenuController extends Controller
         // $menus = Menu::all();
         $menus = Menu::with('jenis')->with('resto')->get();
 
-        return response()->json($menus);
+        return response()->json($menus, 200);
     }
 
     public function store(Request $request)

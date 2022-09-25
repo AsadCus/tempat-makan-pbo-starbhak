@@ -7,8 +7,7 @@
     <div class="card-header">
         <h3 class="card-title">Pesanan</h3>
         <a href="/pesanan/store" class="btn btn-secondary btn-sm float-right">Tes</a>
-        <button type="button" class="btn btn-secondary btn-sm float-right" data-toggle="modal"
-            data-target="#modalPemesanan">
+        <button type="button" id="buttonPesan" class="btn btn-secondary btn-sm float-right" data-toggle="modal" data-target="#modalPemesanan">
             Pesan
         </button>
     </div>
@@ -70,13 +69,14 @@
     </div>
 </div>
 
+<button id="tes">tes</button>
+<p id="disini"></p>
+
 {{-- @if ( Auth::user()->level == 'admin' )
     <button class="btn btn-primary rounded-circle" style="width: 40px; height: 40px; position: absolute; bottom: 0; right: 0; margin-right: 25px; margin-bottom: 75px;" data-toggle="modal" data-target="#modalAddUser">
         <i class="bi bi-plus"></i>
     </button>
 @endif --}}
-
-
 
 {{-- Modal Edit User --}}
 {{-- <div class="modal fade" id="modalEditUser" tabindex="-1" role="dialog">
@@ -147,18 +147,18 @@
                         <table class="table table-borderless">
                             <tr class="d-flex justify-content-between">
                                 <td style="padding: 0;" class="col-11">
-                                    <div class="input-group">
+                                    <div class="input-group menu-body">
                                         <div class="input-group-prepend">
                                             <label class="input-group-text" for="menu_id">Menu :</label>
                                         </div>
-                                        <select name="menu_id" id="menuSelect" class="form-control selectPemesanan" onchange="jmlHarga()" required>
+                                        <select name="menu_id" id="menuSelect" class="form-control selectPemesanan pilih-menu" onchange="jmlHarga()" required>
                                             <option selected>Pilih Menu..</option>
                                             @foreach ($menu->where('status', 'tersedia') as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama_menu }}</option>
                                             @endforeach
                                         </select>
-                                        <input type="text" class="form-control col-1" name="qty" placeholder="Qty" value="1">
-                                        <input type="text" id="jml_harga" class="form-control col-3 dengan-rupiah" placeholder="Jumlah Harga" name="jml_harga">
+                                        <input type="text" id="jumlahMenu" class="form-control col-1" name="qty" placeholder="Qty" value="1">
+                                        <input type="text" id="jml_harga" class="form-control col-3 dengan-rupiah total-harga" placeholder="Jumlah Harga" name="jml_harga">
                                     </div>
                                 </td>
                                 {{-- <td style="padding: 0;" class="col-2">

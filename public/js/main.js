@@ -130,8 +130,53 @@ function formatRupiah(angka, prefix) {
     return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
 }
 
-function jmlHarga() {
-    // var jml_harga = formatRupiah(document.getElementById("menuSelect").value, 'Rp. ');
-    var jml_harga = document.getElementById("menuSelect").value;
-    document.getElementById("jml_harga").value = jml_harga;
-}
+// function jmlHarga() {
+//     // var jml_harga = formatRupiah(document.getElementById("menuSelect").value, 'Rp. ');
+//     var jml_harga = document.getElementById("menuSelect").value;
+//     document.getElementById("jml_harga").value() = jml_harga;
+// }
+
+$('#buttonPesan').ready(function() {
+    $.ajax({url:"/api/menu", success: function(result){
+        
+        $('.pilih-menu').on('change', function() {
+            // var JumlahMenu = {};
+            $("#jumlahMenu").keyup(function() {
+                JumlahMenu = $(this).val();
+                console.log(JumlahMenu);
+
+                var menuId = $('.pilih-menu').val() - 1;
+                var qty = JumlahMenu;
+                var intHarga = result[menuId]['harga'];
+                console.log(intHarga);
+                // alert(intHarga.replace(/[^0-9]/g,''));
+                var totalHarga = intHarga.replace(/[^0-9]/g,'') * qty;
+                console.log(totalHarga);
+                var totalHargaString = totalHarga.toString();
+                var totalHargaRupiah = formatRupiah(totalHargaString, 'Rp. ');
+                console.log(totalHargaRupiah);
+
+                var menuBody = $('.menu-body');
+                var totalHargaData = menuBody.children();
+                
+                var html = '';
+
+                totalHargaData.last().remove();
+
+                html +=
+                    '<input type="text" id="jml_harga" class="form-control col-3 dengan-rupiah total-harga" placeholder="Jumlah Harga" name="jml_harga" value="' + totalHargaRupiah + '">';
+
+                menuBody.append(html);
+            });
+        });
+    }});
+})
+
+$(document).ready(function(){
+    $('#tes').click(function(){
+        $.ajax({url: "/api/menu", success: function(result){
+            console.log(result);
+            // $('#disini').html(result);
+        }});
+    });
+});

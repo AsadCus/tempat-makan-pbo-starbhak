@@ -5,8 +5,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MejaController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\PesananController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RestoController;
+use App\Http\Controllers\PesananController;
+// use App\Http\Controllers\Api\RestoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,4 +86,7 @@ Route::put('/user/update/{id}', [UserController::class, 'update']);
 Route::get('/pesanan/show/{id}', [PesananController::class, 'show']);
 Route::get('/pesanan/store', [PesananController::class, 'store']);
 Route::post('/pesanan/bayar/{id}', [PesananController::class, 'bayar']);
+
+// ========================================= Resto ===================================================
+Route::put('/resto/update/{id}', [RestoController::class, 'update'])->name('update.resto');
  
